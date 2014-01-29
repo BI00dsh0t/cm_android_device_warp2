@@ -117,8 +117,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01500000
 TARGET_ARCH := arm
 
 TARGET_KERNEL_CONFIG := warp2_defconfig
-#TARGET_KERNEL_SOURCE := kernel/zte/warp2
-TARGET_PREBUILT_KERNEL := device/zte/warp2/kernel
+TARGET_KERNEL_SOURCE := kernel/zte/warp2
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 
 # Partition Sizes
@@ -157,7 +156,3 @@ ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mtp,adb
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/zte/warp2/UsbController.cpp
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
-
-# Releasetools
-#TARGET_PROVIDES_RELEASETOOLS := true
-#TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/zte/warp2/releasetools/warp2_ota_from_target_files

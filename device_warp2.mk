@@ -10,12 +10,8 @@ DEVICE_PACKAGE_OVERLAYS += device/zte/warp2/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
-LOCAL_KERNEL := $(LOCAL_PATH)/kernel
 # Kernel Modules
 $(call inherit-product-if-exists, $(LOCAL_PATH)/prebuilts/lib/modules/modules.mk)
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
 
 ## Ramdisk
 PRODUCT_COPY_FILES += \

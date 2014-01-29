@@ -17,7 +17,6 @@ $(call inherit-product-if-exists, $(LOCAL_PATH)/prebuilts/lib/modules/modules.mk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilts/root/init.warp2.rc:root/init.warp2.rc \
     $(LOCAL_PATH)/prebuilts/root/logo.bmp:root/logo.bmp \
-    $(LOCAL_PATH)/prebuilts/root/init:root/init \
     $(LOCAL_PATH)/prebuilts/root/init.qcom.sh:root/init.qcom.sh \
     $(LOCAL_PATH)/prebuilts/root/init.qcom.usb.rc:root/init.qcom.usb.rc \
     $(LOCAL_PATH)/prebuilts/root/init.qcom.usb.sh:root/init.qcom.usb.sh \

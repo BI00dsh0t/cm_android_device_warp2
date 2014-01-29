@@ -7,8 +7,8 @@ on early-init
     symlink /storage/sdcard0 /mnt/sdcard
 
     chmod 0701 /mnt/media_rw
-    mkdir /mnt/media_rw/sdcard0 0775 system system
-    mkdir /storage/sdcard0 0000 system system
+    mkdir /mnt/media_rw/sdcard 0775 system system
+    mkdir /storage/sdcard 0000 system system
 
 
 on init
@@ -17,9 +17,9 @@ on init
     mkdir /cache 0770 system cache
     mkdir /persist 0771 system system
 
-service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
-    class late_start
-    disabled
+on fs
+    mount_all fstab.warp2
+    
 
 on emmc-fs
     # msm8660 firmware partitions
@@ -27,11 +27,12 @@ on emmc-fs
     mkdir /vendor               0771 system system
     mkdir /vendor/etc           0771 system system
     mkdir /vendor/firmware      0771 system system
-
-    mount ext4 /dev/block/mmcblk0p15 /system wait ro data=ordered noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p18 /data wait noatime nosuid nodev data=ordered noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p17 /cache wait noatime nosuid nodev data=ordered noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p7 /persist wait noatime nosuid nodev data=ordered noauto_da_alloc
+    
+    mount_all fstab.warp2
+#    mount ext4 /dev/block/mmcblk0p15 /system wait ro data=ordered noauto_da_alloc
+#    mount ext4 /dev/block/mmcblk0p18 /data wait noatime nosuid nodev data=ordered noauto_da_alloc
+#    mount ext4 /dev/block/mmcblk0p17 /cache wait noatime nosuid nodev data=ordered noauto_da_alloc
+#    mount ext4 /dev/block/mmcblk0p7 /persist wait noatime nosuid nodev data=ordered noauto_da_alloc
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
@@ -316,6 +317,10 @@ service hostapd /system/bin/hostapd -dddd /data/misc/wifi/hostapd.conf
     user root
     group wifi
     oneshot
+    disabled
+
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
+    class late_start
     disabled
 
 on property:init.svc.bootanim=stopped

@@ -94,7 +94,7 @@
 
     <EncoderProfile quality="low" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="192000"
+             bitRate="19200"
              width="176"
              height="144"
              frameRate="30" />
@@ -120,7 +120,7 @@
 
     <EncoderProfile quality="qcif" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="192000"
+             bitRate="19200"
              width="176"
              height="144"
              frameRate="30" />
@@ -213,7 +213,7 @@
 
     <EncoderProfile quality="timelapselow" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="192000"
+             bitRate="19200"
              width="176"
              height="144"
              frameRate="30" />
@@ -239,7 +239,7 @@
 
     <EncoderProfile quality="timelapseqcif" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="192000"
+             bitRate="19200"
              width="176"
              height="144"
              frameRate="30" />
@@ -260,20 +260,6 @@
       <Audio codec="amrnb"
              bitRate="12200"
              sampleRate="8000"
-             channels="1" />
-    </EncoderProfile>
-	
-    <EncoderProfile quality="timelapsevga" fileFormat="mp4" duration="30">
-      <Video codec="h264"
-             bitRate="2000000"
-             width="640"
-             height="480"
-             frameRate="30" />
-
-      <!-- audio setting is ignored -->
-      <Audio codec="aac"
-             bitRate="96000"
-             sampleRate="16000"
              channels="1" />
     </EncoderProfile>
 
@@ -317,7 +303,7 @@
 
     <EncoderProfile quality="low" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="192000"
+             bitRate="19200"
              width="176"
              height="144"
              frameRate="30" />
@@ -343,7 +329,7 @@
 
     <EncoderProfile quality="qcif" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="192000"
+             bitRate="19200"
              width="176"
              height="144"
              frameRate="30" />
@@ -436,7 +422,7 @@
 
     <EncoderProfile quality="timelapselow" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="192000"
+             bitRate="19200"
              width="176"
              height="144"
              frameRate="30" />
@@ -449,9 +435,9 @@
 
     <EncoderProfile quality="timelapsehigh" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="14000000"
-             width="1280"
-             height="720"
+             bitRate="2000000"
+             width="640"
+             height="480"
              frameRate="30" />
 
       <Audio codec="aac"
@@ -462,7 +448,7 @@
 
     <EncoderProfile quality="timelapseqcif" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="192000"
+             bitRate="19200"
              width="176"
              height="144"
              frameRate="30" />
@@ -486,38 +472,11 @@
              channels="1" />
     </EncoderProfile>
 
-	<EncoderProfile quality="timelapsevga" fileFormat="mp4" duration="30">
-      <Video codec="h264"
-             bitRate="2000000"
-             width="640"
-             height="480"
-             frameRate="30" />
-
-      <!-- audio setting is ignored -->
-      <Audio codec="aac"
-             bitRate="96000"
-             sampleRate="16000"
-             channels="1" />
-    </EncoderProfile>
-	
     <EncoderProfile quality="timelapse480p" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="2000000"
              width="640"
              height="480"
-             frameRate="30" />
-
-      <Audio codec="aac"
-             bitRate="156000"
-             sampleRate="48000"
-             channels="2" />
-    </EncoderProfile>
-	
-    <EncoderProfile quality="timelapse720p" fileFormat="mp4" duration="30">
-      <Video codec="h264"
-             bitRate="14000000"
-             width="1280"
-             height="720"
              frameRate="30" />
 
       <Audio codec="aac"

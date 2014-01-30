@@ -36,41 +36,41 @@ target=`getprop ro.board.platform`
 
 case "$target" in
     "msm7627_6x")
-        echo 1 > /sys/devices/platform/msm_sdcc.1/polling
-        echo 1 > /sys/devices/platform/msm_sdcc.2/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.1/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.2/polling
         ;;
 
     "msm7627_ffa")
-        echo 1 > /sys/devices/platform/msm_sdcc.2/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.2/polling
         ;;
 
     "msm7627_surf")
-        echo 1 > /sys/devices/platform/msm_sdcc.1/polling
-        echo 1 > /sys/devices/platform/msm_sdcc.2/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.1/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.2/polling
         ;;
 
     "msm7627a")
-        echo 1 > /sys/devices/platform/msm_sdcc.2/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.2/polling
         ;;
 
     "msm7630_surf")
-        echo 1 > /sys/devices/platform/msm_sdcc.3/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.3/polling
         ;;
 
     "msm7630_1x")
-        echo 1 > /sys/devices/platform/msm_sdcc.3/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.3/polling
         ;;
 
     "msm7630_fusion")
-        echo 1 > /sys/devices/platform/msm_sdcc.3/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.3/polling
         ;;
 
     "msm8660")
-        echo 1 > /sys/devices/platform/msm_sdcc.4/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.4/polling
         ;;
 
     "msm8660_csfb")
-        echo 1 > /sys/devices/platform/msm_sdcc.4/polling
+        echo "$arg" > /sys/devices/platform/msm_sdcc.4/polling
         ;;
 esac
 

@@ -128,15 +128,12 @@ PRODUCT_PACKAGES += \
 
 ## Bluetooth
 #PRODUCT_PACKAGES += \
-#	hciattach \
-#	hciconfig \
-#	hcitool \
-#	hdmid
+    hciattach \
+    hciconfig \
+    hcitool \
+    hdmid
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilts/bin/hdmid:system/bin/hdmid \
-    $(LOCAL_PATH)/prebuilts/bin/hciattach:system/bin/hciattach \
-    $(LOCAL_PATH)/prebuilts/bin/hci_qcomm_init:system/bin/hci_qcomm_init \
     $(LOCAL_PATH)/prebuilts/etc/bluetooth/main.conf:system/etc/bluetooth/main.conf \
     $(LOCAL_PATH)/prebuilts/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
     $(LOCAL_PATH)/prebuilts/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
@@ -202,6 +199,7 @@ PRODUCT_COPY_FILES += \
 # Wifi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilts/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/prebuilts/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/prebuilts/etc/wifi/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
     $(LOCAL_PATH)/prebuilts/bin/hostapd:system/bin/hostapd \
     $(LOCAL_PATH)/prebuilts/bin/hostapd_cli:system/bin/hostapd_cli \
@@ -215,7 +213,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilts/etc/firmware/fw_bcmdhd_p2p.bin:system/etc/firmware/fw_bcmdhd_p2p.bin
 
 PRODUCT_PACKAGES += \
-    libwpa_client
+    libwpa_client \
+    libnetcmdiface
 
 # Extra packages
 PRODUCT_PACKAGES += \

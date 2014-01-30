@@ -37,6 +37,115 @@
 target=`getprop ro.board.platform`
 case "$target" in
     msm8960*)
+
+# auto detect ar6004-sdio card
+# for ar6004-sdio card, the vendor id and device id is as the following
+# vendor id  device id
+#    0x0271     0x0400
+#    0x0271     0x0401
+      sdio_vendors=`echo \`cat /sys/bus/mmc/devices/*/*/vendor\``
+      sdio_devices=`echo \`cat /sys/bus/mmc/devices/*/*/device\``
+      ven_idx=0
+
+      for vendor in $sdio_vendors; do
+          case "$vendor" in
+          "0x0271")
+              dev_idx=0
+              for device in $sdio_devices; do
+                  if [ $ven_idx -eq $dev_idx ]; then
+                      case "$device" in
+                      "0x0400" | "0x0401")
+                          wlanchip="AR6004-SDIO"
+                          ;;
+                      *)
+                          ;;
+                      esac
+                  fi
+                  dev_idx=$(( $dev_idx + 1))
+              done
+              ;;
+          *)
+              ;;
+          esac
+          ven_idx=$(( $ven_idx + 1))
+      done
+# auto detect ar6004-sdio card end
+
+# auto detect ar6004-usb card
+# for ar6004-usb card, the vendor id and device id is as the following
+# vendor id  product id
+#    0x0cf3     0x9374
+#    0x0cf3     0x9372
+      usb_vendors=`echo \`cat /sys/bus/usb/devices/*/*/idVendor\``
+      usb_products=`echo \`cat /sys/bus/usb/devices/*/*/idProduct\``
+      ven_idx=0
+
+      for vendor in $usb_vendors; do
+          case "$vendor" in
+          "0cf3")
+              dev_idx=0
+              for product in $usb_products; do
+                  if [ $ven_idx -eq $dev_idx ]; then
+                      case "$product" in
+                      "9374" | "9372")
+                          wlanchip="AR6004-USB"
+                          ;;
+                      *)
+                          ;;
+                      esac
+                  fi
+                  dev_idx=$(( $dev_idx + 1))
+              done
+              ;;
+          *)
+              ;;
+          esac
+          ven_idx=$(( $ven_idx + 1))
+      done
+# auto detect ar6004-usb card end
+
+      echo "The WLAN Chip ID is $wlanchip"
+      case "$wlanchip" in
+      "AR6004-USB")
+        setprop wlan.driver.ath 2
+        rm  /system/lib/modules/wlan.ko
+        rm  /system/lib/modules/cfg80211.ko
+        ln -s /system/lib/modules/ath6kl-3.5/ath6kl_usb.ko \
+		/system/lib/modules/wlan.ko
+        ln -s /system/lib/modules/ath6kl-3.5/cfg80211.ko \
+		/system/lib/modules/cfg80211.ko
+        rm /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin
+        rm /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin
+        ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin_usb \
+		/system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin
+        ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin_usb \
+		/system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin
+        ;;
+      "AR6004-SDIO")
+        setprop wlan.driver.ath 2
+        setprop qcom.bluetooth.soc ath3k
+        rm  /system/lib/modules/wlan.ko
+        rm  /system/lib/modules/cfg80211.ko
+        ln -s /system/lib/modules/ath6kl-3.5/ath6kl_sdio.ko \
+		/system/lib/modules/wlan.ko
+        ln -s /system/lib/modules/ath6kl-3.5/cfg80211.ko \
+		/system/lib/modules/cfg80211.ko
+        rm /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin
+        rm /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin
+        ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin_sdio \
+		/system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin
+        ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin_sdio \
+		/system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin
+        ;;
+      *)
+        echo "*** WI-FI chip ID is not specified in /persist/wlan_chip_id **"
+        echo "*** Use the default WCN driver.                             **"
+        setprop wlan.driver.ath 0 
+        rm  /system/lib/modules/wlan.ko
+        rm  /system/lib/modules/cfg80211.ko
+        ln -s /system/lib/modules/prima/prima_wlan.ko /system/lib/modules/wlan.ko
+        ln -s /system/lib/modules/prima/cfg80211.ko /system/lib/modules/cfg80211.ko
+
         # The property below is used in Qcom SDK for softap to determine
         # the wifi driver config file
         setprop wlan.driver.config /data/misc/wifi/WCNSS_qcom_cfg.ini
@@ -80,6 +189,8 @@ case "$target" in
         serialno=`getprop ro.serialno`
         echo $serialno > /sys/devices/platform/wcnss_wlan.0/serial_number
         ;;
+      esac
+      ;;
     msm8660*)
     exit 0
     ;;
@@ -87,15 +198,26 @@ case "$target" in
         wlanchip=`cat /persist/wlan_chip_id`
         echo "The WLAN Chip ID is $wlanchip"
         case "$wlanchip" in
-            "AR6003")
-             mount -t vfat -o remount,rw,barrier=0 /dev/block/mtdblock1 /system
+            "ATH6KL")
+             setprop wlan.driver.ath 1
              rm  /system/lib/modules/wlan.ko
-             ln -s /system/wifi/ar6000.ko /system/lib/modules/wlan.ko
-             mv /system/bin/wpa_supplicant /system/bin/wpa_supplicant_wcn
-             ln -s /system/others/wpa_supplicant /system/bin/wpa_supplicant
-             mount -t vfat -o remount,ro,barrier=0 /dev/block/mtdblock1 /system
+             rm  /system/lib/modules/cfg80211.ko
+             ln -s /system/lib/modules/ath6kl/ath6kl_sdio.ko /system/lib/modules/wlan.ko
+             ln -s /system/lib/modules/ath6kl/cfg80211.ko /system/lib/modules/cfg80211.ko
+             ;;
+            "WCN1314")
+             setprop wlan.driver.ath 0
+             rm  /system/lib/modules/wlan.ko
+             rm  /system/lib/modules/cfg80211.ko
+             ln -s /system/lib/modules/volans/WCN1314_rf.ko /system/lib/modules/wlan.ko
+             ln -s /system/lib/modules/volans/cfg80211.ko /system/lib/modules/cfg80211.ko
              ;;
             *)
+             setprop wlan.driver.ath 1
+             rm  /system/lib/modules/wlan.ko
+             rm  /system/lib/modules/cfg80211.ko
+             ln -s /system/lib/modules/ath6kl/ath6kl_sdio.ko /system/lib/modules/wlan.ko
+             ln -s /system/lib/modules/ath6kl/cfg80211.ko /system/lib/modules/cfg80211.ko
              echo "********************************************************************"
               echo "*** Error:WI-FI chip ID is not specified in /persist/wlan_chip_id **"
              echo "*******    WI-FI may not work    ***********************************"
@@ -103,34 +225,11 @@ case "$target" in
         esac
     ;;
     msm7630*)
-        wifishd=`getprop wlan.driver.status`
-        wlanchip=`cat /persist/wlan_chip_id`
-        echo "The WLAN Chip ID is $wlanchip"
-        case "$wlanchip" in
-            "WCN1314")
-             mount -t vfat -o remount,rw,barrier=0 /dev/block/mtdblock1 /system
-             ln -s /system/lib/modules/volans/WCN1314_rf.ko /system/lib/modules/wlan.ko
-             mount -t vfat -o remount,ro,barrier=0 /dev/block/mtdblock1 /system
-             ;;
-            "WCN1312")
-             mount -t vfat -o remount,rw,barrier=0 /dev/block/mtdblock1 /system
-             ln -s /system/lib/modules/libra/libra.ko /system/lib/modules/wlan.ko
-	      ln -s /data/hostapd/qcom_cfg.ini /etc/firmware/wlan/qcom_cfg.ini
-             ln -s /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
-             mount -t vfat -o remount,ro,barrier=0 /dev/block/mtdblock1 /system
-	      ;;
-           *)
-            echo "********************************************************************"
-	     echo "*** Error:WI-FI chip ID is not specified in /persist/wlan_chip_id **"
-            echo "*******    WI-FI may not work    ***********************************"
-            ;;
-        esac
+    exit 0
     ;;
     msm7627*)
-        mount -t vfat -o remount,rw,barrier=0 /dev/block/mtdblock1 /system
         ln -s /data/hostapd/qcom_cfg.ini /etc/firmware/wlan/qcom_cfg.ini
         ln -s /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
-        mount -t vfat -o remount,ro,barrier=0 /dev/block/mtdblock1 /system
     ;;
 
     *)

@@ -127,7 +127,7 @@ PRODUCT_PACKAGES += \
     liboverlay
 
 ## Bluetooth
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     hciattach \
     hciconfig \
     hcitool \
@@ -262,6 +262,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilts/bin/cnd:system/bin/cnd \
     $(LOCAL_PATH)/prebuilts/bin/akmd8962_new:system/bin/akmd8962_new \
     $(LOCAL_PATH)/prebuilts/bin/rmt_storage:system/bin/rmt_storage
+    
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 

@@ -161,3 +161,5 @@ BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 #PhilZ Recovery
 TARGET_SCREEN_WIDTH := 540
 TARGET_SCREEN_HEIGHT := 960
+TARGET_COMMON_NAME := ZTE Warp Sequent - N861
+BRIGHTNESS_SYS_FILE := /sys/class/leds/lcd-backlight/brightness

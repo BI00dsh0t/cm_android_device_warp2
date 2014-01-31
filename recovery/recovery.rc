@@ -45,6 +45,8 @@ on init
     # Create private mountpoint so we can MS_MOVE from staging
     mount tmpfs tmpfs /mnt/secure mode=0700,uid=0,gid=0
 
+    symlink /storage/sdcard0 /sdcard
+
     # Directory for staging bindmounts
     mkdir /mnt/secure/staging 0700 root root
 

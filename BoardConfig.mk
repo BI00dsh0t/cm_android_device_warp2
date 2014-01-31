@@ -136,7 +136,7 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_SDCARD_INTERNAL := true
 
 # recovery
-#TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/warp2/recovery/kernel
+TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/warp2/recovery/kernel
 TARGET_RECOVERY_INITRC := device/zte/warp2/recovery/recovery.rc
 BOARD_CUSTOM_GRAPHICS := ../../../device/zte/warp2/recovery/graphics.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"font_7x16.h\"
@@ -157,3 +157,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mtp,adb
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/zte/warp2/UsbController.cpp
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
+
+#PhilZ Recovery
+TARGET_SCREEN_WIDTH := 540
+TARGET_SCREEN_HEIGHT := 960

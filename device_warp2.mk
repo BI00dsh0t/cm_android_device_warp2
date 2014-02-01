@@ -46,8 +46,8 @@ PRODUCT_PROPERTY_OVERRIDES+= dalvik.vm.execution-mode=int:jit \
 
 # Provides overrides to configure the Dalvik heap for a standard tablet device.
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapstartsize=8m
-    dalvik.vm.heapgrowthlimit=64m
+    dalvik.vm.heapstartsize=8m  \
+    dalvik.vm.heapgrowthlimit=64m \
     dalvik.vm.heapsize=256m
 
 #LLVM for RenderScript
@@ -111,7 +111,9 @@ PRODUCT_PACKAGES += \
     mm-venc-omx-test \
     mm-venc-omx-test720p \
     mm-video-driver-test \
-    mm-video-encdrv-test
+    mm-video-encdrv-test \
+    libdashplayer \
+    libaudio-resampler
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \

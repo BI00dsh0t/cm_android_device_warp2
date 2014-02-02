@@ -31,6 +31,7 @@ lib/libqc-opt.so
 lib/libqdi.so
 lib/libqdp.so
 lib/libuim.so
+lib/libdl.so
 
 ## Audio
 lib/libaudioalsa.so

@@ -39,6 +39,7 @@ TARGET_FORCE_CPU_UPLOAD := true
 WITH_JIT := true
 ENABLE_JSC_JIT := true
 JS_ENGINE := v8
+ENABLE_WEBGL := true
 
 # Wi-Fi
 WIFI_BAND := 802_11_ABGN

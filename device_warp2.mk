@@ -173,7 +173,8 @@ PRODUCT_PACKAGES += \
     audio_policy.msm7x30 \
     audio.primary.msm7x30 \
     audio.a2dp.default \
-    libaudioutils
+    libaudioutils \
+    libaudioparameter
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilts/etc/audio_policy.conf:system/etc/audio_policy.conf \
@@ -224,7 +225,12 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     Screenshot \
     Torch \
-    Camera
+    Camera \
+    Trebuchet
+
+# Webkit
+PRODUCT_PACKAGES += \
+    libwebcore
 
 ## Media & Display Firmware
 PRODUCT_COPY_FILES += \
@@ -267,6 +273,12 @@ PRODUCT_COPY_FILES += \
     
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bq.gpu_to_cpu_unsupported=1 \
+    debug.hwc.fakevsync=1 \
+    debug.sf.no_hw_vsync=1 \
+    ro.zygote.disable_gl_preload=true
 
 PRODUCT_NAME := full_warp2
 PRODUCT_DEVICE := warp2

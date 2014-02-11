@@ -191,7 +191,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilts/lib/liboemcamera.so:obj/lib/liboemcamera.so \
     $(LOCAL_PATH)/prebuilts/lib/hw/camera.vendor.msm7x30.so:system/lib/hw/camera.vendor.msm7x30.so \
     $(LOCAL_PATH)/prebuilts/lib/hw/camera.vendor.msm7x30.so:obj/lib/hw/camera.vendor.msm7x30.so \
-    $(LOCAL_PATH)/prebuilts/lib/libmmjpeg.so:system/lib/hw/libmmjpeg.so
+    $(LOCAL_PATH)/prebuilts/lib/libmmjpeg.so:system/lib/hw/libmmjpeg.so \
+    $(LOCAL_PATH)/prebuilts/lib/libmmjpeg.so:obj/system/lib/hw/libmmjpeg.so \
+    $(LOCAL_PATH)/prebuilts/lib/libgemini.so:/system/lib/libgemini.so \
+    $(LOCAL_PATH)/prebuilts/lib/libgemini.so:obj/system/lib/libgemini.so
+
 ## liblights
 PRODUCT_PACKAGES += \
     lights.msm7x30

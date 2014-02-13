@@ -1,6 +1,10 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
+ifeq ($(BOARD_USE_REVERSE_FFC), true)
+LOCAL_CFLAGS += -DBOARD_USE_REVERSE_FFC
+endif
+
 LOCAL_SRC_FILES := \
     CameraWrapper.cpp
 

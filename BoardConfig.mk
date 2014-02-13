@@ -1,4 +1,4 @@
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
 
 # inherit from the proprietary version
 -include vendor/zte/warp2/BoardConfigVendor.mk
@@ -84,6 +84,8 @@ TARGET_PROVIDES_LIBCAMERA := true
 BOARD_USES_QCOM_LEGACY_CAM_PARAMS := true
 BOARD_USE_NASTY_PTHREAD_CREATE_HACK := true
 COMMON_GLOBAL_CFLAGS += -DBINDER_COMPAT
+TARGET_DISABLE_ARM_PIE := true
+BOARD_USE_REVERSE_FFC := true
 
 #Graphics
 BOARD_EGL_CFG := device/zte/warp2/prebuilts/lib/egl/egl.cfg

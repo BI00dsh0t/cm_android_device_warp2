@@ -111,6 +111,15 @@ static char *camera_fixup_getparams(int id, const char *settings)
     params.dump();
 #endif
 
+#if defined(BOARD_USE_REVERSE_FFC)
+    
+    if (id == 1) {
+        /* Change default parameters for the front camera */
+        params.set("front-camera-mode", "reverse"); // default is "mirror"
+    }
+        
+#endif
+
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
 
@@ -130,6 +139,15 @@ static char *camera_fixup_setparams(int id, const char *settings)
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
     params.dump();
+#endif
+
+#if defined(BOARD_USE_REVERSE_FFC)
+    
+    if (id == 1) {
+        /* Change default parameters for the front camera */
+        params.set("front-camera-mode", "reverse"); // default is "mirror"
+    }
+        
 #endif
 
     android::String8 strParams = params.flatten();

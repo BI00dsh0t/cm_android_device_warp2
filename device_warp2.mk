@@ -196,7 +196,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilts/lib/libgemini.so:/system/lib/libgemini.so \
     $(LOCAL_PATH)/prebuilts/lib/libgemini.so:obj/system/lib/libgemini.so \
     $(LOCAL_PATH)/prebuilts/lib/libmmipl.so:/system/lib/libmmipl.so \
-    $(LOCAL_PATH)/prebuilts/lib/libmmipl.so:obj/system/lib/libmmipl.so
+    $(LOCAL_PATH)/prebuilts/lib/libmmipl.so:obj/lib/libmmipl.so
 
 ## liblights
 PRODUCT_PACKAGES += \
